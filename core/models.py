@@ -41,7 +41,15 @@ CATEGORIES = (
     ('16', 'Mixed Reality'), 
     ('17', 'Quantum Computing'), 
     ('18', 'Big Data'), 
-    ('19', 'Other')
+    ('19', 'Business Intelligence'),
+    ('20', 'Neural Networks'),
+    ('21', 'Natural Language Processing'),
+    ('22', 'Computer Vision'),
+    ('23', 'Data Mining'),
+    ('24', 'Data Analytics'),
+    ('25', 'Data Visualization'),
+    ('26', 'Deep Learning'),
+    ('27', 'Cloud Computing'),
 )
 
 TAGS = (
@@ -62,10 +70,6 @@ TAGS = (
     ('14', 'Rust'),
     ('15', 'TypeScript'),
     ('16', 'SQL'),
-    ('17', 'HTML'),
-    ('18', 'CSS'),
-    ('19', 'React'),
-    ('20', 'Tailwind CSS'),
     ('21', 'MongoDB'),
     ('22', 'Artificial Intelligence'),
     ('23', 'Machine Learning'),
@@ -109,6 +113,7 @@ TAGS = (
 
 
 FRAMEWORKS = (
+    ('0', 'Node.js'),
     ('1', 'Django'),
     ('2', 'Flask'),
     ('3', 'React'),
@@ -116,7 +121,7 @@ FRAMEWORKS = (
     ('5', 'Vue'),
     ('6', 'Laravel'),
     ('7', 'Spring'),
-    ('8', 'Express'),
+    ('8', 'Express.js'),
     ('9', 'Django Rest Framework'),
     ('10', 'Flutter'),
     ('11', 'React Native'),
@@ -149,7 +154,7 @@ FRAMEWORKS = (
     ('38', 'Tailwind CSS'),
     ('39', 'Bootstrap'),
     ('40', 'Materialize'),
-    ('41', 'Bulma'),
+    ('41', 'HTML5'),
     ('42', 'Foundation'),
     ('43', 'Semantic UI'),
     ('44', 'UIKit'),
@@ -157,6 +162,10 @@ FRAMEWORKS = (
     ('46', 'Chakra UI'),
     ('47', 'Tailwind UI'),
     ('48', 'PrimeReact'),
+    ('49', 'CSS3'),
+    ('50', 'Sass'),
+    ('51', 'Less'),
+    ('52', 'Stylus'),
 )
 
 
@@ -169,12 +178,65 @@ STATUS = (
 )
 
 
+
+SKILLS = (
+    ('0', 'JavaScript'),
+    ('1', 'Python'),
+    ('2', 'Java'),
+    ('3', 'C++'),
+    ('4', 'C#'),
+    ('5', 'PHP'),
+    ('6', 'Swift'),
+    ('7', 'Kotlin'),
+    ('8', 'Dart'),
+    ('9', 'Ruby'),
+    ('10', 'Go'),
+    ('11', 'R'),
+    ('12', 'Scala'),
+    ('13', 'Rust'),
+    ('14', 'TypeScript'),
+    ('15', 'SQL'),
+    ('16', 'MongoDB'),
+    ('17', 'Artificial Intelligence'),
+    ('18', 'Machine Learning'),
+    ('19', 'Deep Learning'),
+    ('20', 'Data Science'),
+    ('21', 'Big Data'),
+    ('22', 'Cloud Computing'),
+    ('23', 'DevOps'),
+    ('24', 'Blockchain'),
+    ('25', 'Internet of Things (IoT)'),
+    ('26', 'Virtual Reality (VR)'),
+    ('27', 'Augmented Reality (AR)'),
+    ('28', 'Cybersecurity'),
+    ('29', 'Responsive Web Design'),
+    ('30', 'Progressive Web Apps (PWA)'),
+    ('31', 'Microservices'),
+    ('32', 'Serverless Architecture'),
+    ('33', 'Containerization'),
+    ('34', 'Git'),
+    ('35', 'Jenkins'),
+    ('36', 'Docker'),
+    ('37', 'Kubernetes'),
+    ('38', 'Amazon Web Services (AWS)'),
+    ('39', 'Microsoft Azure'),
+    ('40', 'Google Cloud Platform (GCP)'),
+    ('41', 'WordPress'),
+    ('42', 'GitHub'),
+)
+
+
+
+
+
+
 class Social(models.Model):
 
     # auto generated id
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='social_user')
+
     name = models.TextField()
     link = models.TextField()
     logo = models.TextField()
@@ -220,6 +282,7 @@ class Post (models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     content = RichTextUploadingField(verbose_name="Compose Content", blank=True, null=True)
 
     summary = models.TextField(verbose_name='Post Summary', blank=True, null=True)
@@ -245,7 +308,156 @@ class Image(models.Model):
         verbose_name_plural = "Images"
     
     def __str__(self):
-        return self.image
+        return "Image"
+
+
+class TrustBrand(models.Model):
+    # auto generated id
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='trust_brand_user')
+
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    name = models.TextField()
+    link = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Trust Brands"
+    
+    def __str__(self):
+        return "Trust Brand"
+
+
+class ContactInfo(models.Model):
+    # auto generated id
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contact_user')
+
+    address = models.TextField()
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    map_location = models.TextField()
+
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Contacts"
+    
+    def __str__(self):
+        return "Contact"
+    
+class ContactMessage(models.Model):
+    # auto generated id
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contact_message_user')
+
+    full_name = models.TextField()
+    email = models.EmailField()
+    subject = models.TextField()
+    message = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Contact Messages"
+    
+    def __str__(self):
+        return "Contact Message"
+
+class Client(models.Model):
+    # auto generated id
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='client_user')
+
+    profile = models.ImageField(upload_to='images/', blank=True, null=True)
+    name = models.TextField()
+    surname = models.TextField()
+    job = models.TextField()
+    nationality = models.TextField()
+    feedback = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Clients"
+    
+    def __str__(self):
+        return "Client"
+
+
+class ExtraInfo(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='extra_info_user')
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    years_of_experience = models.IntegerField(blank=True, null=True)
+    
+    github_stars = models.IntegerField(blank=True, null=True)
+
+    projects_completed = models.IntegerField(blank=True, null=True)
+
+    positive_feedback = models.IntegerField(blank=True, null=True)
+
+    happy_clients = models.IntegerField(blank=True, null=True)
+
+    cups_of_coffee = models.IntegerField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Extra Info"
+
+    def __str__(self):
+        return "Extra Info"
+
+class About(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='about_user')
+
+    profile_picture = models.ImageField(upload_to='images/', blank=True, null=True)
+
+    images = models.ManyToManyField(Image, blank=True, related_name='about_images')
+
+    about = models.TextField()
+
+    skills = CustomMultiSelectField(choices=SKILLS, blank=True, null=True)
+
+    cv = models.FileField(upload_to='files/', blank=True, null=True)
+
+    # Extra info
+    extra_info = models.ManyToManyField(ExtraInfo, related_name='about_extra_info')
+
+    # Trust Brands
+    trust_brands = models.ManyToManyField(TrustBrand, related_name='about_trust_brands')
+
+    # Clients
+    clients = models.ManyToManyField(Client, related_name='about_clients')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "About"
+    
+
+    def __str__(self): 
+        return self.about
+    
+    
+
 
 class Project(models.Model):
     
