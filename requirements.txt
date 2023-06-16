@@ -10,3 +10,11 @@ psycopg2-binary
 
 #Django multichoice:
 django-multiselectfield
+
+#Django countries:
+django-countries
+
+#DJANGO PHONE NUMBER
+django-phonenumber-field
+
+

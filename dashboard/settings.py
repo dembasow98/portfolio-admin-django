@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'core',
     'ckeditor',
     'ckeditor_uploader',
+    'django_countries',
+    'phonenumber_field',
 ]
 
 
