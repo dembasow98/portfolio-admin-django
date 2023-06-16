@@ -44,7 +44,10 @@ class Social(models.Model):
     
     class Meta:
         unique_together = ("name", "link")
-
+        verbose_name_plural = "Socials"
+    
+    def __str__(self):
+        return format_string(self.name) + "-social-" + str(self.id)
 #class Image(models.Model):
 
 class Image(models.Model):
@@ -52,7 +55,7 @@ class Image(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='image_user')
-
+    title = models.TextField()
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -61,7 +64,7 @@ class Image(models.Model):
         verbose_name_plural = "Images"
     
     def __str__(self):
-        return "Image"
+        return format_string(self.title) + "-image-" + str(self.id)
 
 
 class TrustBrand(models.Model):
@@ -81,7 +84,7 @@ class TrustBrand(models.Model):
         verbose_name_plural = "Trust Brands"
     
     def __str__(self):
-        return self.name
+        return format_string(self.name) + "-trust-brand-" + str(self.id)
 
 
 class ContactInfo(models.Model):
@@ -103,7 +106,7 @@ class ContactInfo(models.Model):
         verbose_name_plural = "Contact Informations"
     
     def __str__(self):
-        return "Contact"
+        return self.user.username + "-contact-info-" + str(self.id)
 
     
 class ContactMessage(models.Model):
@@ -124,7 +127,7 @@ class ContactMessage(models.Model):
         verbose_name_plural = "Contact Messages"
     
     def __str__(self):
-        return "Contact Message"
+        return format_string(self.full_name)+ "-content-message-" + str(self.id)
 
 
 class Client(models.Model):
@@ -154,7 +157,9 @@ class Client(models.Model):
         verbose_name_plural = "Clients"
     
     def __str__(self):
-        return self.name
+        #replace the space with dash
+
+        return format_string(self.name)+"-"+format_string(self.surname)+"-client-" + str(self.id)
 
 
 class ExtraInfo(models.Model):
@@ -165,15 +170,15 @@ class ExtraInfo(models.Model):
 
     years_of_experience = models.IntegerField(blank=True, null=True)
     
-    github_stars = models.TextField(null=True)
+    github_stars = models.IntegerField(null=True)
 
-    projects_completed = models.TextField(null=True)
+    projects_completed = models.IntegerField(null=True)
 
-    positive_feedback = models.TextField(null=True)
+    positive_feedback = models.IntegerField(null=True)
 
-    happy_clients = models.TextField(null=True)
+    happy_clients = models.IntegerField(null=True)
 
-    cups_of_coffee = models.TextField(null=True)
+    cups_of_coffee = models.IntegerField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -182,7 +187,9 @@ class ExtraInfo(models.Model):
         verbose_name_plural = "Extra Info"
 
     def __str__(self):
-        return self.years_of_experience
+        # Get the username from thee user:
+
+        return  self.user.username + "-extra-info-" + str(self.id)
 
 class Skill(models.Model):
     
@@ -203,7 +210,7 @@ class Skill(models.Model):
         verbose_name_plural = "Skills"
 
     def __str__(self): 
-        return self.name
+        return  format_string(self.name) + "-skill-" + str(self.id)
 
 
 
@@ -224,7 +231,7 @@ class About(models.Model):
     cv = models.FileField(upload_to='files/', blank=True, null=True)
 
     # Extra info
-    extra_info = models.ManyToManyField(ExtraInfo, related_name='about_extra_info')
+    extra_info = models.OneToOneField(ExtraInfo, on_delete = models.CASCADE,related_name='about_extra_info')
 
     # Trust Brands
     trust_brands = models.ManyToManyField(TrustBrand, related_name='about_trust_brands')
@@ -243,7 +250,7 @@ class About(models.Model):
     
 
     def __str__(self): 
-        return self.about
+        return self.user.username + "-about-" + str(self.id)
     
     
 
@@ -256,8 +263,6 @@ class Category(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='category_user')
 
     name = models.TextField()
-    description = models.TextField()
-    link = models.TextField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -266,7 +271,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return self.name
+        return format_string(self.name) + "-category-"+ str(self.id)
 
 class Tag(models.Model):
 
@@ -275,17 +280,15 @@ class Tag(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='tag_user')
 
     name = models.TextField()
-    description = models.TextField()
-    link = models.TextField()
-
+  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = "Tags"
+        verbose_name_plural = "Tags"    
 
     def __str__(self):
-        return self.name
+        return format_string(self.name) + "-tag-" + str(self.id)
     
 class Technology(models.Model):
     # auto generated id
@@ -303,7 +306,7 @@ class Technology(models.Model):
         verbose_name_plural = "Technologies"
 
     def __str__(self):
-        return self.name
+        return format_string(self.name) + "-technology-" + str(self.id)
 
 
 class Post (models.Model):
@@ -345,7 +348,7 @@ class Post (models.Model):
         verbose_name_plural = "Posts"
 
     def __str__(self):
-        return self.title
+        return format_string(self.title) + "-post-" + str(self.id)
 
 
 
@@ -394,4 +397,10 @@ class Project(models.Model):
         verbose_name_plural = "Projects"
 
     def __str__(self):
-        return self.title
+        return format_string(self.title) + "-project-" + str(self.id)
+    
+
+
+# A FUNCTION TO FORMAT STRING:
+def format_string(string):
+    return string.replace(" ", "-").lower()
