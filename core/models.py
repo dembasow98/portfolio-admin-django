@@ -48,7 +48,7 @@ class Social(models.Model):
     
     def __str__(self):
         return format_string(self.name) + "-social-" + str(self.id)
-#class Image(models.Model):
+
 
 class Image(models.Model):
     # auto generated id
@@ -327,8 +327,6 @@ class Post (models.Model):
 
     thumbnail = models.ImageField(upload_to='images/', blank=True, null=True)
 
-    technologies = models.ManyToManyField(Technology, blank=True, related_name='post_technologies')
-    
     categories = models.ManyToManyField(Category, blank=True, related_name='post_categories')
 
     tags = models.ManyToManyField(Tag, blank=True, related_name='post_tags')

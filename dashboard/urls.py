@@ -15,6 +15,17 @@ admin.site.index_title  = "ZERO EXCUSES ADMINISTRATION PANEL"
 
 router = routers.DefaultRouter()
 router.register(r'projects', ProjectView, 'project')
+router.register(r'posts', PostView, 'post')
+router.register(r'technologies', TechnologyView, 'technology')
+router.register(r'tags', TagView, 'tag')
+router.register(r'categories', CategoryView, 'category')
+router.register(r'about', AboutView, 'about')
+router.register(r'skills', SkillView, 'skill')
+router.register(r'extra-info', ExtraInfoView, 'extra-info')
+router.register(r'clients', ClientView, 'client')
+router.register(r'contact-messages', ContactMessageView, 'contact-message')
+router.register(r'contact-info', ContactInfoView, 'contact-info')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
