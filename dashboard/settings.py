@@ -32,6 +32,9 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_countries',
     'phonenumber_field',
+
+    'corsheaders',
+    'rest_framework',
 ]
 
 
@@ -60,9 +63,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #corsheaders
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {
@@ -134,3 +141,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CORS CONFIGS
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'
+]

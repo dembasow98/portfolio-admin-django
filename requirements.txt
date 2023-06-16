@@ -18,3 +18,9 @@ django-countries
 django-phonenumber-field
 
 
+#Django Rest framework:
+djangorestframework
+
+#Django cors headers:
+django-cors-headers
+
