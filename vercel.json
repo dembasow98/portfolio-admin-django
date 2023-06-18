@@ -6,14 +6,13 @@
         "config": {
           "maxLambdaSize": "15mb",
           "runtime": "python3.9"
-        },
-        "output": "dashboard/dist"
+        }
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "dashboard//wsgi.py"
+        "dest": "dashboard/dist/wsgi.py"
       }
     ]
   }
