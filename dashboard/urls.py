@@ -8,6 +8,14 @@ from django.conf import settings
 from rest_framework import routers
 from core.views import *
 
+
+
+# Require login to access admin panel
+#from django.contrib.auth.decorators import login_required
+#admin.autodiscover()
+#admin.site.login = login_required(admin.site.login)
+
+
 admin.site.site_header = "ZERO EXCUSES"
 admin.site.site_title = "ZERO EXCUSES ADMINISTRATION PANEL"
 admin.site.index_title  = "ZERO EXCUSES ADMINISTRATION PANEL"
@@ -30,5 +38,5 @@ router.register(r'contact-info', ContactInfoView, 'contact-info')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('api/', include(router.urls)),
+    path('api/v1.0.0/', include(router.urls)),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

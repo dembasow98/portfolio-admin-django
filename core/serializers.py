@@ -80,7 +80,6 @@ class AboutSerializer(serializers.ModelSerializer):
             'id', 
             'user',
             'profile_picture',
-            'title',
             'images',
             'about',
             'skills',
@@ -89,7 +88,6 @@ class AboutSerializer(serializers.ModelSerializer):
             'trust_brands',
             'clients',
             'contact',
-            'thumbnail',
             'created_at',
             'updated_at',
         )
