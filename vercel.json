@@ -1,13 +1,20 @@
 {
-    "builds": [{
+    "builds": [
+      {
         "src": "dashboard/wsgi.py",
         "use": "@ardnt/vercel-python-wsgi",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }],
+        "config": {
+          "maxLambdaSize": "15mb",
+          "runtime": "python3.9"
+        },
+        "output": "dashboard/dist"
+      }
+    ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "deploy/wsgi.py"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "dashboard//wsgi.py"
+      }
     ]
-}
+  }
+  
