@@ -1,21 +1,42 @@
-"""dashboard URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+
+from django.conf.urls.static import static
+from django.conf import settings
+
+from rest_framework import routers
+from core.views import *
+
+
+
+# Require login to access admin panel
+#from django.contrib.auth.decorators import login_required
+#admin.autodiscover()
+#admin.site.login = login_required(admin.site.login)
+
+
+admin.site.site_header = "ZERO EXCUSES"
+admin.site.site_title = "ZERO EXCUSES ADMINISTRATION PANEL"
+admin.site.index_title  = "ZERO EXCUSES ADMINISTRATION PANEL"
+
+
+router = routers.DefaultRouter()
+router.register(r'projects', ProjectView, 'project')
+router.register(r'posts', PostView, 'post')
+router.register(r'technologies', TechnologyView, 'technology')
+router.register(r'tags', TagView, 'tag')
+router.register(r'categories', CategoryView, 'category')
+router.register(r'about', AboutView, 'about')
+router.register(r'skills', SkillView, 'skill')
+router.register(r'extra-info', ExtraInfoView, 'extra-info')
+router.register(r'clients', ClientView, 'client')
+router.register(r'contact-messages', ContactMessageView, 'contact-message')
+router.register(r'contact-info', ContactInfoView, 'contact-info')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('api/v1.0.0/', include(router.urls)),
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
