@@ -24,3 +24,6 @@ djangorestframework
 #Django cors headers:
 django-cors-headers
 
+
+# Django version
+django  >= 4.1.1
