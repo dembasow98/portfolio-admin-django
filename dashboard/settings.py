@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-_ge!y*bo(aa+1@chy)*5f7#km)b694!u6)9$3n4+q=@(mo-^xn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'sleeplessnights.pythonanywhere.com/'] # Allow *.vercel.app
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','sleeplessnights.pythonanywhere.com'] # Allow *.vercel.app
 
 
 # Application definition
@@ -90,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dashboard.wsgi.app'
+WSGI_APPLICATION = 'dashboard.wsgi.application'
 
 
 # Database
@@ -150,6 +150,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS CONFIGS
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000'
+# ]
