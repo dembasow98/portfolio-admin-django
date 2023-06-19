@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_ge!y*bo(aa+1@chy)*5f7#km)b694!u6)9$3n4+q=@(mo-^xn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app'] # Allow *.vercel.app
+ALLOWED_HOSTS = ['localhost', 'sleeplessnights.pythonanywhere.com/'] # Allow *.vercel.app
 
 
 # Application definition
@@ -75,7 +75,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join( BASE_DIR, 'templates' ),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,7 +90,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dashboard.wsgi.application'
+WSGI_APPLICATION = 'dashboard.wsgi.app'
 
 
 # Database
@@ -138,6 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
