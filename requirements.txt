@@ -26,4 +26,4 @@ django-cors-headers
 
 
 # Django version
-django  >= 4.1.1
+Django  >= 4.1.1
