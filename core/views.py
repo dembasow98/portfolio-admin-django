@@ -6,6 +6,11 @@ from rest_framework import viewsets
 from .serializers import *
 from .models import *
 
+
+
+
+def index(request):
+    return render(request, 'index.html')
 # Create your views here.
 
 class ProjectView(viewsets.ModelViewSet):
