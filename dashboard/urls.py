@@ -8,6 +8,8 @@ from django.conf import settings
 from rest_framework import routers
 from core.views import *
 
+from core.urls import *
+
 
 
 # Require login to access admin panel
@@ -35,7 +37,9 @@ router.register(r'contact-messages', ContactMessageView, 'contact-message')
 router.register(r'contact-info', ContactInfoView, 'contact-info')
 
 
+
 urlpatterns = [
+    path('', include('core.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('api/v1.0.0/', include(router.urls)),
